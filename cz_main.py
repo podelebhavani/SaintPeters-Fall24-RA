@@ -28,7 +28,7 @@ def auth_reddit():
     reddit = praw.Reddit(
         client_id='',
         client_secret='',
-        user_agent='ChenZhouRedditApp/0.1'
+        user_agent=''
     )
     return reddit
 
