@@ -26,8 +26,8 @@ def submission_to_dict(submission):
 # Authentication using your credentials
 def auth_reddit():
     reddit = praw.Reddit(
-        client_id='RuuhB65fi--czOJWAz5ndA',
-        client_secret='kqVMfGyIxtLnuKBoiabaXQWgtAzzUg',
+        client_id='',
+        client_secret='',
         user_agent='ChenZhouRedditApp/0.1'
     )
     return reddit
