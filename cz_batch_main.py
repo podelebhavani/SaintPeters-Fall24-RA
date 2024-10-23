@@ -253,12 +253,12 @@ output_file = './Data/raw_1021/subreddit_politics.csv'  # Output CSV file
 total_posts = 10000 # Total number to pull
 
 # Fetch 10,000 posts
-fetch_reddit_data_by_subreddit_query(
-    subreddit_name='all', 
-    search_query=search_query, 
-    output_file='./Data/raw_1021/all_trump.csv', 
-    total_posts=total_posts
-)
+# fetch_reddit_data_by_subreddit_query(
+#     subreddit_name='all', 
+#     search_query=search_query, 
+#     output_file='./Data/raw_1021/all_trump.csv', 
+#     total_posts=total_posts
+# )
 # print('limit', reddit.auth.limits)
 
 subreddit_list = ['politics']
@@ -269,11 +269,11 @@ output_file_list = [
     './Data/raw_1021/subquery_kamala.csv'
 ]
 
-# fetch_reddit_data_by_sub(
-#     subreddit_name='Republican', 
-#     output_file='./Data/raw_1021/subreddit_Republican.csv', 
-#     total_posts=100000
-# )
+fetch_reddit_data_by_sub(
+    subreddit_name='trump', 
+    output_file='./Data/raw_1021/subreddit_trump.csv', 
+    total_posts=100000
+)
 print('limit', reddit.auth.limits)
 
 # Subreddit: politics, democrats, Republican, PoliticalDiscussion
