@@ -23,7 +23,7 @@ reddit = praw.Reddit(
 )
 
 # Function to pull Reddit posts and save to CSV in batches
-def fetch_reddit_data_by_sub_query(
+def fetch_reddit_data_by_subreddit_query(
         subreddit_name, 
         search_query, 
         output_file, 
@@ -65,7 +65,7 @@ def fetch_reddit_data_by_sub_query(
             # Fetch data from Reddit using subreddit.search()
             search_results = subreddit.search(
                 search_query, 
-                sort='new', 
+                sort='hot', 
                 limit=batch_size, 
                 params={
                     'after': after
@@ -101,6 +101,7 @@ def fetch_reddit_data_by_sub_query(
 
                 if batch_posts:
                     after = f't3_{batch_posts[-1]["id"]}'
+                    print('after', after)
                 
                 print(f"Fetched {posts_fetched}/{total_posts} posts")
             else:
@@ -170,7 +171,7 @@ def fetch_reddit_data_by_sub(
                 })
                 posts_fetched += 1
                 print(f"Fetched {posts_fetched}/{total_posts} posts")
-            
+        
             # Respect Reddit's rate limits (sleep for 2 seconds between batches)
             time.sleep(2)
 
@@ -252,17 +253,37 @@ output_file = './Data/raw_1021/subreddit_politics.csv'  # Output CSV file
 total_posts = 10000 # Total number to pull
 
 # Fetch 10,000 posts
-#fetch_reddit_data_by_sub_query(subreddit_name=subreddit_name, search_query=search_query, output_file=output_file, total_posts=total_posts)
+fetch_reddit_data_by_subreddit_query(
+    subreddit_name='all', 
+    search_query=search_query, 
+    output_file='./Data/raw_1021/all_trump.csv', 
+    total_posts=total_posts
+)
+# print('limit', reddit.auth.limits)
 
-# fetch_reddit_data_by_sub(subreddit_name=subreddit_name, output_file=output_file, total_posts=total_posts)
+subreddit_list = ['politics']
+subquery_list = ['Trump', 'kamala', 'election']
+output_file_list = [
+    './Data/raw_1021/subreddit_politics.csv',
+    './Data/raw_1021/subquery_trump.csv',
+    './Data/raw_1021/subquery_kamala.csv'
+]
+
+# fetch_reddit_data_by_sub(
+#     subreddit_name='Republican', 
+#     output_file='./Data/raw_1021/subreddit_Republican.csv', 
+#     total_posts=100000
+# )
+print('limit', reddit.auth.limits)
+
 # Subreddit: politics, democrats, Republican, PoliticalDiscussion
 
 # start_time = datetime(2024, 10, 10).timestamp()
 # end_time = datetime(2024, 10, 20).timestamp()
 # fetch_reddit_data_by_time(
-#     subreddit_name='politics', 
-#     output_file=output_file, 
-#     total_posts=total_posts, 
+#     subreddit_name='all', 
+#     output_file='./Data/raw_1021/all_trump.csv', 
+#     total_posts=10000, 
 #     start_time=start_time, 
 #     end_time=end_time
 # )
